@@ -1,0 +1,8 @@
+[package]
+name = "codemd"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+fs-err = "3.2.2"
+path-clean = "1.0.1"
