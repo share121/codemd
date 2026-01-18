@@ -1,8 +1,10 @@
+use arboard::Clipboard;
 use fs_err as fs;
 use path_clean::PathClean;
 use std::env;
 
 fn main() {
+    let mut clipboard = Clipboard::new().expect("无法获取剪贴板");
     let mut args = env::args();
     args.next();
     let exts = args.next().expect("你需要传入类似 js,rs,html 的扩展名列表");
@@ -47,6 +49,7 @@ fn main() {
             count += 1;
         }
     }
-    fs::write("codemd.md", md).unwrap();
     println!("共生成 {} 个代码块", count);
+    clipboard.set_text(md).expect("写入剪贴板失败");
+    println!("已将代码块复制到剪贴板");
 }
